@@ -223,7 +223,6 @@ public class GeneratorBoard {
 		PlayCell[][] newPlayBoard = new PlayCell[this.getBoardDimension()][this.getBoardDimension()];
 		
 		
-		
 		return null; 
 		
 	}
