@@ -1,22 +1,26 @@
 //Ben Wagner
 
+//Put name at top if you contributed^ 
 public class PlayBoard {
 
 	private PlayCell[][] BoardPattern;
+	private int[][] SolutionPattern;
 		
 	private int boardDimension;
 	private int chunkDimension;
 	
 	public PlayBoard() {
 		this.BoardPattern = null;
+		this.SolutionPattern = null;
 		this.boardDimension = 0;
 		this.chunkDimension = 0;
 	}
 	
-	private PlayBoard(PlayBoard generatedBoard) {
-		this.BoardPattern = generatedBoard.BoardPattern;
-		this.boardDimension = generatedBoard.getBoardDimension();
-		this.chunkDimension = generatedBoard.getChunkDimension();
+	public PlayBoard(PlayCell[][] playPattern, int[][] solutionPattern, int boardSize, int chunkSize) {
+		this.BoardPattern = playPattern;
+		this.SolutionPattern = solutionPattern;
+		this.boardDimension = boardSize;
+		this.chunkDimension = chunkSize;
 	}//tested
 	
 	public int getBoardDimension() {
@@ -25,6 +29,14 @@ public class PlayBoard {
 	
 	public int getChunkDimension() {
 		return this.chunkDimension;
+	}
+	
+	public void setBoardPattern(PlayCell[][] solution) {
+		this.BoardPattern = solution;
+	}
+	
+	public void setSolutionPattern(int[][] solution) {
+		this.SolutionPattern = solution;
 	}
 	
 	private void setCell(int X, int Y, PlayCell value) {
@@ -50,9 +62,9 @@ public class PlayBoard {
 	/*Chunks are the 3 x 3 squares
 	* They are numbered left to right, top to bottom
 	* returns an array with results left to right, top to bottom
-	* E.g. [1 2 3]
-	*	   [4 5 6] -> [1 2 3 4 5 6 7 8 9]
-	*	   [7 8 9]
+	* E.g. [a b c]
+	*	   [d e f] -> [a b c d e f g h i]
+	*	   [g h i]
 	*/
 	private PlayCell[] getChunk(int chunk) {
 		PlayCell[] chunkArray = new PlayCell[this.getBoardDimension()];
@@ -130,18 +142,20 @@ public class PlayBoard {
 		return true;
 	}//tested
 	
-	public void printValidity() {
-		System.out.format("R = row, C = column, S = section%n");
+	public String validityString() {
+		String result = "";
+		result += String.format("R = row, C = column, S = section%n");
 		for(int ii = 0; ii < 9; ii++) {
-			System.out.format("R%s: %4s ", ii, this.validRow(ii));
-			System.out.format("C%s: %4s ", ii, this.validColumn(ii));
-			System.out.format("S%s: %4s%n", ii+1, this.validChunk(ii + 1));
+			result += String.format("R%s: %4s, C%s: %4s, S%s: %4s%n", ii, this.validRow(ii), ii, this.validColumn(ii), ii+1, this.validChunk(ii + 1));
 		}
 		
-		System.out.format("Board: %s%n%n", this.validBoard());
+		result += String.format("Board: %s%n%n", this.validBoard());
 		
-		System.out.println(this.toString());
+		result += this.toString();
+		return result;
 	}//tested
+	
+	
 	
 	private int countInArray(int target, int[] array) {
 		int count = 0;
@@ -172,6 +186,10 @@ public class PlayBoard {
 		return result;
 	}//tested
 	
+	
+	//----------------------------------------------------------------
+	//Below are methods that probably will not be necesarry
+	//----------------------------------------------------------------	
 	
 	public PlayBoard rotateRight() {
 		PlayBoard rotatedBoard = new PlayBoard();
@@ -224,5 +242,5 @@ public class PlayBoard {
 		}
 		return newArray;
 	}//tested
-//--------------------------------
+	
 }

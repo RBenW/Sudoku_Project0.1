@@ -1,5 +1,7 @@
 //Ben Wagner
 
+//Put name at top if you contributed^ 
+
 public class GeneratorBoard {
 	
 	private int[][] BoardPattern;
