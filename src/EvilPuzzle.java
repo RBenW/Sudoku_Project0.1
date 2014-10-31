@@ -2,14 +2,14 @@
 
 //Put name at top if you contributed^ 
 
-public class MediumPuzzle extends Puzzle {
+public class EvilPuzzle {
 
 	int numberHints = 3;
-	String difficulty = "Medium";
+	String difficulty = "Evil";
 	private int timeLimit = 10;
-	int difficultyRating = 2;
+	int difficultyRating = 4;
 	
-	public MediumPuzzle() {
+	public EvilPuzzle() {
 		super();
 	}
 }
