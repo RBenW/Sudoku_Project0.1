@@ -13,7 +13,8 @@ public class EasyPuzzle extends Puzzle {
 		super();
 	}
 	
-	public EasyPuzzle(PlayBoard gameboard, String filename) {
+	public EasyPuzzle(String filename) {
 		super();
+		this.board = importPlayBoard(filename);
 	}
 }

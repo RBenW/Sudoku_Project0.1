@@ -12,4 +12,9 @@ public class MediumPuzzle extends Puzzle {
 	public MediumPuzzle() {
 		super();
 	}
+	
+	public MediumPuzzle(String filename) {
+		super();
+		this.board = importPlayBoard(filename);
+	}
 }

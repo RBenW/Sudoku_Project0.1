@@ -43,6 +43,29 @@ public class PlayBoard {
 		this.SolutionPattern = solution;
 	}
 	
+	public boolean validBoard() {
+		for(int ii = 0; ii < this.getBoardDimension(); ii++) {
+			if(validRow(ii) == false || validColumn(ii) == false || validChunk(ii + 1) == false)
+				return false;
+		}
+		return true;
+	}//tested
+	
+	public boolean checkAgainstSolution() {
+		return numberIncorrect() == 0;
+	}
+	
+	public int numberIncorrect() {
+		int result = 0;
+		for(int ii = 0; ii < getBoardDimension(); ii++) {
+			for(int ix = 0; ii < getBoardDimension(); ii++) {
+				if(BoardPattern[ii][ix].getValue() == SolutionPattern[ii][ix]) 
+					result++;
+			}
+		}
+		return result;
+	}
+	
 	private void setCell(int X, int Y, PlayCell value) {
 		this.BoardPattern[Y][X] = value;
 	}//tested
@@ -131,14 +154,6 @@ public class PlayBoard {
 		return validArray(this.getChunk(chunk));
 	}//tested
 	
-	public boolean validBoard() {
-		for(int ii = 0; ii < this.getBoardDimension(); ii++) {
-			if(validRow(ii) == false || validColumn(ii) == false || validChunk(ii + 1) == false)
-				return false;
-		}
-		return true;
-	}//tested
-	
 	public String validityString() {
 		String result = "";
 		result += String.format("R = row, C = column, S = section%n");
@@ -188,7 +203,7 @@ public class PlayBoard {
 	//----------------------------------------------------------------
 	
 	public void pencilIn(int X, int Y, int value) {
-		this.getCell(X,Y).pencilIn(value);
+		this.getCell(X, Y).pencilIn(value);
 	}	
 	
 	public void eraseInCell(int X, int Y, int value) {
@@ -197,6 +212,10 @@ public class PlayBoard {
 	
 	public int getValueAt(int X, int Y) {
 		return this.getCell(X, Y).getValue();
+	}
+	
+	public void writePenAt(int X, int Y, int value) {
+		this.getCell(X, Y).writeInPen(value);
 	}
 	
 	public boolean isCellLockedAt(int X, int Y) {

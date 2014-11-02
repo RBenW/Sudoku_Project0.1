@@ -12,4 +12,9 @@ public class HardPuzzle extends Puzzle {
 	public HardPuzzle() {
 		super();
 	}
+	
+	public HardPuzzle(String filename) {
+		super();
+		this.board = importPlayBoard(filename);
+	}
 }

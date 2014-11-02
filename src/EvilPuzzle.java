@@ -2,7 +2,7 @@
 
 //Put name at top if you contributed^ 
 
-public class EvilPuzzle {
+public class EvilPuzzle extends Puzzle {
 
 	private int numberHints = 3;
 	private String difficulty = "Evil";
@@ -11,5 +11,10 @@ public class EvilPuzzle {
 	
 	public EvilPuzzle() {
 		super();
+	}
+	
+	public EvilPuzzle(String filename) {
+		super();
+		this.board = importPlayBoard(filename);
 	}
 }

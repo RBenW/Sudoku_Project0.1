@@ -4,13 +4,13 @@
 
 public class Puzzle {
 	
-	private int numberHints;
-	private PlayBoard board;
-	private String difficulty;
-	private int difficultyRating;
-	private long timeLimit;
-	private long startTime;
-	private boolean timeLeft;
+	protected int numberHints;
+	protected PlayBoard board;
+	protected String difficulty;
+	protected int difficultyRating;
+	protected long timeLimit;
+	protected long startTime;
+	protected boolean timeLeft;
 	
 	public Puzzle() {
 		this.board = new PlayBoard();
@@ -20,6 +20,8 @@ public class Puzzle {
 	
 	public Puzzle(String filename) {
 		this.board = importPlayBoard(filename);
+		this.startTime = System.currentTimeMillis();
+		this.timeLeft = true;
 	}
 	
 	//----------------------------------------------------------------
@@ -53,20 +55,12 @@ public class Puzzle {
 		return this.difficulty;
 	}
 	
-	
+	public int getNumberHints() {
+		return this.numberHints;
+	}
 	//----------------------------------------------------------------
 	//Methods to work with lower levels of architecture and maintain encapsulation principle
 	//----------------------------------------------------------------
-
-	//----From Hint----//
-
-	public int getRemainingHints() {
-		return numberHints;
-	}
-	
-	public Hint getNextHint() {
-		return null;
-	}
 	
 	//----From PlayBoard----//
 	
@@ -80,6 +74,14 @@ public class Puzzle {
 	
 	public boolean isBoardValid() {
 		return this.board.validBoard();
+	}
+		
+	public boolean isCorrectBoard() {
+		return this.board.checkAgainstSolution();
+	}
+	
+	public int numberIncorrectCells() {
+		return this.board.numberIncorrect();
 	}
 	 
 	//----From PlayCell----//
@@ -96,6 +98,10 @@ public class Puzzle {
 		return this.board.getValueAt(X, Y);
 	}
 	
+	public void writeValueInPen(int X, int Y, int value) {
+		this.board.writePenAt(X, Y, value);
+	}
+	
 	public boolean isLockedCell(int X, int Y) {
 		return this.board.isCellLockedAt(X, Y);
 	}
@@ -103,13 +109,12 @@ public class Puzzle {
 	public void clearPencilMarksInCell(int X, int Y) {
 		this.board.eraseAllPencilAt(X, Y);
 	}
-		
+	
 	//----------------------------------------------------------------
 	//Methods only for testing and debugging
 	//----------------------------------------------------------------
-	
-	
-	public PlayBoard basePlayBoard() {//Debugging and testing only
+		
+	protected PlayBoard basePlayBoard() {//Debugging and testing only
 		PlayBoard defaultBoard = new PlayBoard(null, null, 9, 9);
 		int[][] examplePattern = 
 			{
