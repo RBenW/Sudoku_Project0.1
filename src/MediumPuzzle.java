@@ -4,10 +4,10 @@
 
 public class MediumPuzzle extends Puzzle {
 
-	int numberHints = 3;
-	String difficulty = "Medium";
+	private int numberHints = 3;
+	private String difficulty = "Medium";
 	private int timeLimit = 10;
-	int difficultyRating = 2;
+	private int difficultyRating = 2;
 	
 	public MediumPuzzle() {
 		super();

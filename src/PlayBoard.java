@@ -23,6 +23,10 @@ public class PlayBoard {
 		this.chunkDimension = chunkSize;
 	}//tested
 	
+	//----------------------------------------------------------------
+	//Methods original to this level of architecture
+	//----------------------------------------------------------------
+	
 	public int getBoardDimension() {
 		return this.boardDimension;
 	}
@@ -91,13 +95,6 @@ public class PlayBoard {
 		}		
 	}//tested
 	
-	public void userSwapRow(int row1, int row2) {
-		this.swapRow(row1 - 1, row2 - 1);
-	}//tested
-	
-	public void userSwapColumn(int column1, int column2) {
-		this.swapColumn(column1 - 1, column2 - 1);
-	}//tested
 	
 	private void swapRow(int row1, int row2) {
 		PlayCell[] buffer = new PlayCell[this.getBoardDimension()];
@@ -186,11 +183,42 @@ public class PlayBoard {
 		return result;
 	}//tested
 	
+	//----------------------------------------------------------------
+	//Methods to work with lower levels of architecture and maintain encapsulation
+	//----------------------------------------------------------------
+	
+	public void pencilIn(int X, int Y, int value) {
+		this.getCell(X,Y).pencilIn(value);
+	}	
+	
+	public void eraseInCell(int X, int Y, int value) {
+		this.getCell(X, Y).erase(value);
+	}
+	
+	public int getValueAt(int X, int Y) {
+		return this.getCell(X, Y).getValue();
+	}
+	
+	public boolean isCellLockedAt(int X, int Y) {
+		return this.getCell(X, Y).isLocked();
+	}
+	
+	public void eraseAllPencilAt(int X, int Y) {
+		this.getCell(X, Y).clearPencilArray();
+	}
 	
 	//----------------------------------------------------------------
-	//Below are methods that probably will not be necesarry
+	//Methods that probably will not be necessary
 	//----------------------------------------------------------------	
 	
+	public void userSwapRow(int row1, int row2) {
+		this.swapRow(row1 - 1, row2 - 1);
+	}//tested
+	
+	public void userSwapColumn(int column1, int column2) {
+		this.swapColumn(column1 - 1, column2 - 1);
+	}//tested
+		
 	public PlayBoard rotateRight() {
 		PlayBoard rotatedBoard = new PlayBoard();
 		

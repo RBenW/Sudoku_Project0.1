@@ -4,10 +4,10 @@
 
 public class EvilPuzzle {
 
-	int numberHints = 3;
-	String difficulty = "Evil";
+	private int numberHints = 3;
+	private String difficulty = "Evil";
 	private int timeLimit = 10;
-	int difficultyRating = 4;
+	private int difficultyRating = 4;
 	
 	public EvilPuzzle() {
 		super();

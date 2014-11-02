@@ -4,11 +4,20 @@
 
 public class Hint { //="Hints"
 	
-	String hint; 
-	boolean isUsed;
+	private String hint; 
+	private boolean isUsed;
 	
 	public Hint() {
 		String hint = "pss...pss";//placeholder
 		isUsed = false;
+	}
+	
+	public boolean isHintUsed() {
+		return this.isUsed;
+	}
+	
+	public Hint getHint() {
+		this.isUsed = true;
+		return this;
 	}
 }

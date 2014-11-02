@@ -10,10 +10,10 @@ public class PlayCell {
 	public PlayCell(int cellValue, boolean isCellfixed, int upperBoundOfEntry) {
 		this.value = cellValue;
 		this.fixedValue = false;
-		this.pencilArray = clearPencilArray();
+		this.pencilArray = getClearedPencilArray();
 		PlayCell.highestNumber = upperBoundOfEntry;
 	}
-	
+//--
 	public void pencilIn(int num) {
 		this.pencilArray[num - 1] = true;
 	}
@@ -26,20 +26,20 @@ public class PlayCell {
 		return this.value;
 	}
 	
-	public String getValueString() {
-		return Integer.toString(this.getValue());
-	}
-	
 	public boolean isLocked() {
 		return this.fixedValue == true;
 	}
 	
-	private static boolean[] clearPencilArray() {
+	private static boolean[] getClearedPencilArray() {
 		boolean[] result = new boolean[highestNumber];
 		for(int ii = 0; ii < highestNumber; ii++) {
 			result[ii] = false;
 		}
 		return result;
+	}
+	
+	public void clearPencilArray() {
+		this.pencilArray = getClearedPencilArray();
 	}
 //--------------------------------
 }
