@@ -22,9 +22,9 @@ public class Hint { //="Hints"
 		/*
 		 * Code to operate on board here 
 		 */
-		this.X = 0;
-		this.Y = 0;
-		this.value = 0;
+		this.X = 1;
+		this.Y = 1;
+		this.value = board.getSolutionAt(X, Y);
 		return this;
 	}
 	

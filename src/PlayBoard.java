@@ -74,6 +74,10 @@ public class PlayBoard {
 		return this.BoardPattern[Y][X];
 	}//tested
 	
+	public int getSolutionAt(int X, int Y) {
+		return this.SolutionPattern[Y][X];
+	}//tested
+	
 	private PlayCell[] getRow(int row) {
 		return this.BoardPattern[row];
 	}//tested
