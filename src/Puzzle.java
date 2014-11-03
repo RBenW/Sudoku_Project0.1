@@ -63,7 +63,7 @@ public class Puzzle {
 	//----------------------------------------------------------------
 	
 	//----From PlayBoard----//
-	
+	/*
 	public int getBoardSize() {
 		return this.board.getBoardDimension();
 	}
@@ -83,9 +83,9 @@ public class Puzzle {
 	public int numberIncorrectCells() {
 		return this.board.numberIncorrect();
 	}
-	 
+	*/ 
 	//----From PlayCell----//
-	
+	/*
 	public void pencilInNumber(int X, int Y, int value) {
 		this.board.pencilIn(X, Y, value);
 	}	
@@ -109,7 +109,7 @@ public class Puzzle {
 	public void clearPencilMarksInCell(int X, int Y) {
 		this.board.eraseAllPencilAt(X, Y);
 	}
-	
+	*/
 	//----------------------------------------------------------------
 	//Methods only for testing and debugging
 	//----------------------------------------------------------------

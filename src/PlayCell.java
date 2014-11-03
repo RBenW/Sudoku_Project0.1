@@ -42,7 +42,7 @@ public class PlayCell {
 		return result;
 	}
 	
-	public void clearPencilArray() {
+	public void clearPencil() {
 		this.pencilArray = getClearedPencilArray();
 	}
 //--------------------------------

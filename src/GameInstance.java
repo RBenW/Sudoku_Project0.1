@@ -61,7 +61,7 @@ public class GameInstance { //="SudokuProgram"
 	}
 	
 	//----------------------------------------------------------------
-	//Methods to work with lower levels of architecture and maintain encapsulation principle
+	//Methods to work with lower classes
 	//----------------------------------------------------------------
 
 	//----From Puzzle----//
@@ -95,48 +95,48 @@ public class GameInstance { //="SudokuProgram"
 	//----From PlayBoard----//
 	
 	public int getBoardLength() {
-		return this.gamePuzzle.getBoardSize();
+		return this.gamePuzzle.board.getBoardDimension();
 	}
 	
-	public int getChunkLength() {
-		return this.gamePuzzle.getChunkSize();
+	public int getChunkDimension() {
+		return this.gamePuzzle.board.getChunkDimension();
 	}
 	
-	public boolean checkBoardValidity() {//checks if the current board satisfies the basic requirements of Sudoku
-		return this.gamePuzzle.isBoardValid();
+	public boolean validBoard() {//checks if the current board satisfies the basic requirements of Sudoku
+		return this.gamePuzzle.board.validBoard();
 	}	
 	
-	public boolean isBoardCorrect() {//checks if board matches solution
-		return this.gamePuzzle.isCorrectBoard();
+	public boolean checkAgainstSolution() {//checks if board matches solution
+		return this.gamePuzzle.board.checkAgainstSolution();
 	}
 	
 	public int countIncorrectCells() {//determines number of incorrect cells
-		return this.gamePuzzle.numberIncorrectCells();
+		return this.gamePuzzle.board.numberIncorrect();
 	}
 	
 	//----From PlayCell----//
 	
-	public void pencilInNumberAt(int X, int Y, int value) {
-		this.gamePuzzle.pencilInNumber(X, Y, value);
+	public void pencilInAt(int X, int Y, int value) {
+		this.gamePuzzle.board.pencilInAt(X, Y, value);
 	}	
 	
-	public void eraseNumberAt(int X, int Y, int value) {
-		this.gamePuzzle.eraseNumber(X, Y, value);
+	public void eraseAt(int X, int Y, int value) {
+		this.gamePuzzle.board.eraseAt(X, Y, value);
 	}
 	
 	public void markNumberInPen(int X, int Y, int value) {
-		this.gamePuzzle.writeValueInPen(X, Y, value);
+		this.gamePuzzle.board.writeInPenAt(X, Y, value);
 	}	
 	
 	public int getValueAt(int X, int Y) {
-		return this.gamePuzzle.getCellValue(X, Y);
+		return this.gamePuzzle.board.getValueAt(X, Y);
 	}
 	
 	public boolean isLockedAt(int X, int Y) {
-		return this.gamePuzzle.isLockedCell(X, Y);
+		return this.gamePuzzle.board.isLockedAt(X, Y);
 	}
 	
-	public void erasePencilMarksAt(int X, int Y) {
-		this.gamePuzzle.clearPencilMarksInCell(X, Y);
+	public void clearPencil(int X, int Y) {
+		this.gamePuzzle.board.clearPencilAt(X, Y);
 	}		
 }

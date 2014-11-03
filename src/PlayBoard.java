@@ -116,7 +116,7 @@ public class PlayBoard {
 		this.BoardPattern[row] = RowArray;
 	}//tested
 	
-	private void setColumn (int column, PlayCell[] columnArray) {
+	private void setColumn(int column, PlayCell[] columnArray) {
 		for(int ii = 0; ii < this.getBoardDimension(); ii++) {
 			this.setCell(column, ii, columnArray[ii]);
 		}		
@@ -203,14 +203,14 @@ public class PlayBoard {
 	}//tested
 	
 	//----------------------------------------------------------------
-	//Methods to work with lower levels of architecture and maintain encapsulation
+	//Methods to work with playCell and maintain encapsulation
 	//----------------------------------------------------------------
 	
-	public void pencilIn(int X, int Y, int value) {
+	public void pencilInAt(int X, int Y, int value) {
 		this.getCell(X, Y).pencilIn(value);
 	}	
 	
-	public void eraseInCell(int X, int Y, int value) {
+	public void eraseAt(int X, int Y, int value) {
 		this.getCell(X, Y).erase(value);
 	}
 	
@@ -218,16 +218,16 @@ public class PlayBoard {
 		return this.getCell(X, Y).getValue();
 	}
 	
-	public void writePenAt(int X, int Y, int value) {
+	public void writeInPenAt(int X, int Y, int value) {
 		this.getCell(X, Y).writeInPen(value);
 	}
 	
-	public boolean isCellLockedAt(int X, int Y) {
+	public boolean isLockedAt(int X, int Y) {
 		return this.getCell(X, Y).isLocked();
 	}
 	
-	public void eraseAllPencilAt(int X, int Y) {
-		this.getCell(X, Y).clearPencilArray();
+	public void clearPencilAt(int X, int Y) {
+		this.getCell(X, Y).clearPencil();
 	}
 	
 	//----------------------------------------------------------------
