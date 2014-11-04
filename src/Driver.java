@@ -137,7 +137,6 @@ public class Driver {
 	public void eraseSquare(Player gamePlayer) {
 		int row = 0;
 		int col = 0;
-		int value = 0;
 		
 		boolean exit = false;
 		while(!exit) {
@@ -145,8 +144,6 @@ public class Driver {
 			row = promptForValidValue(1,9);
 			System.out.format("Please enter which col: %n");
 			col = promptForValidValue(1,9);
-			System.out.format("Please enter what value: %n");
-			value = promptForValidValue(1,9);
 			
 			if(!gamePlayer.getGameInstance().isLockedAt(col, row))
 				exit = true;
