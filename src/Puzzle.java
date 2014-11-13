@@ -58,6 +58,10 @@ public class Puzzle {
 	public int getNumberHints() {
 		return this.numberHints;
 	}
+	
+	public PlayBoard getBoard() {
+		return this.board;
+	}
 	//----------------------------------------------------------------
 	//Methods to work with lower levels of architecture and maintain encapsulation principle
 	//----------------------------------------------------------------

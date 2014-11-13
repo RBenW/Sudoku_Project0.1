@@ -31,6 +31,14 @@ public class GameInstance { //="SudokuProgram"
 		
 	}
 	
+	public Puzzle getPuzzle() {
+		return this.gamePuzzle;
+	}
+	
+	public PlayBoard getBoard() {
+		return this.getPuzzle().board;
+	}
+	
 	private Hint[] resetHints() {
 		Hint[] result = new Hint[this.gamePuzzle.getNumberHints()];
 		for(int ii = 0; ii < result.length; ii++) {
@@ -106,8 +114,8 @@ public class GameInstance { //="SudokuProgram"
 		return this.gamePuzzle.board.validBoard();
 	}	
 	
-	public boolean checkAgainstSolution() {//checks if board matches solution
-		return this.gamePuzzle.board.checkAgainstSolution();
+	public boolean hasWonGame() {//checks if board matches solution
+		return this.gamePuzzle.getBoard().hasWon();
 	}
 	
 	public int countIncorrectCells() {//determines number of incorrect cells

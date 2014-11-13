@@ -4,7 +4,9 @@
 import java.util.Scanner;
 
 public class Driver {
-
+	static Player gamePlayer;
+	static int hintNumber = 1;
+	
 	public static void main(String[] args) {
 		String name;
 		int difficultyLevel = 0;
@@ -22,7 +24,12 @@ public class Driver {
 		System.out.format("%nWhat difficulty level would you like to play?%n (1=easy, 2=medium, 3=hard, 4=evil)%n%n");
 		difficultyLevel = promptForValidValue(1,4);
 		
-		Player gamePlayer = new Player(name, getTag(name), difficultyLevel);
+		gamePlayer = new Player(name, getTag(name), difficultyLevel);
+		System.out.println(gamePlayer.getGameInstance().getBoard().toString());
+		while(!gamePlayer.getGameInstance().hasWonGame()) {
+			promptForMove(gamePlayer);
+			System.out.println(gamePlayer.getGameInstance().getBoard().toString());
+		}
 		
 		
 		
@@ -42,7 +49,7 @@ public class Driver {
 		Scanner scan = new Scanner(System.in);
 		boolean exit = false;
 		int result = 0;
-		System.out.format("Please enter a value between %s and %s%n",lowerBound, upperBound);
+		System.out.format("Please enter a value between %s and %s%n",lowerBound, upperBound);	
 		while(!exit) {
 			result = scan.nextInt();
 			if(result >= lowerBound || result <= upperBound) 
@@ -50,7 +57,7 @@ public class Driver {
 			else
 				System.out.format("Incorrect, please enter a value between %s and %s%n",lowerBound, upperBound);
 		}
-		scan.close();
+
 		return result;
 	}
 	
@@ -64,11 +71,33 @@ public class Driver {
 		return result;
 	}
 	
+	public static void promptForMove(Player gamePlayer) {
+		
+		System.out.format("Which move would you like to make?%n"
+				+ "1-Pencil In%n"
+				+ "2-Erase%n"
+				+ "3-Erase square%n"
+				+ "4-Mark In Pen%n"
+				+ "5-Use white out%n"
+				+ "6-Use Hint%n");
+		int selector = promptForValidValue(1,6);
+				
+		switch (selector) {
+				case 1: pencilIn();
+				case 2: erase();
+				case 3: eraseSquare();
+				case 4: markInPen();
+				//case 5: useWhiteOut();//needs to be written
+				case 6: useHint();
+				default: ;
+		}
+	}
+	
 	//----------------------------------------------------------------
 	//The following methods are methods the player has at disposal to play
 	//----------------------------------------------------------------
 	
-	public void pencilIn(Player gamePlayer) {
+	public static void pencilIn() {
 		int row = 0;
 		int col = 0;
 		int value = 0;
@@ -90,7 +119,7 @@ public class Driver {
 		gamePlayer.getGameInstance().pencilInAt(col, row, value);		
 	}
 	
-	public void erase(Player gamePlayer) {
+	public static void erase() {
 		int row = 0;
 		int col = 0;
 		int value = 0;
@@ -112,7 +141,7 @@ public class Driver {
 		gamePlayer.getGameInstance().eraseAt(col, row, value);		
 	}
 	
-	public void markInPen(Player gamePlayer) {
+	public static void markInPen() {
 		int row = 0;
 		int col = 0;
 		int value = 0;
@@ -134,7 +163,7 @@ public class Driver {
 		gamePlayer.getGameInstance().markNumberInPen(col, row, value);		
 	}
 	
-	public void eraseSquare(Player gamePlayer) {
+	public static void eraseSquare() {
 		int row = 0;
 		int col = 0;
 		
@@ -153,7 +182,10 @@ public class Driver {
 		gamePlayer.getGameInstance().clearPencil(col, row);		
 	}
 	
-	
+	public static void useHint() {
+		gamePlayer.useHint(hintNumber);	
+		hintNumber++;
+	}
 	
 	
 	

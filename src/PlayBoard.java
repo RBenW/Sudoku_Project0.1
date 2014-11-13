@@ -51,7 +51,7 @@ public class PlayBoard {
 		return true;
 	}//tested
 	
-	public boolean checkAgainstSolution() {
+	public boolean hasWon() {
 		return numberIncorrect() == 0;
 	}
 	
@@ -193,9 +193,15 @@ public class PlayBoard {
 	
 	public String toString() {
 		String result = "";
+		char lockState;
 		for(int iY = 0; iY < this.getBoardDimension(); iY++) {
 			for(int iX = 0; iX < this.getBoardDimension(); iX++) {
-				result = result + " " + this.getCell(iX, iY);
+				if(this.getCell(iX, iY).isLocked()) {
+					lockState = 'L';
+				} else {
+					lockState = 'O';
+				}
+				result = result + " [" + this.getCell(iX, iY).getValue() + "-" + lockState + "]";
 			}
 			result = result + "\n";
 		}
