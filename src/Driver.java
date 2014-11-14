@@ -89,7 +89,7 @@ public class Driver {
 				case 4: markInPen();
 				//case 5: useWhiteOut();//needs to be written
 				case 6: useHint();
-				default: ;
+				default: promptForMove(gamePlayer);
 		}
 	}
 	
@@ -108,13 +108,21 @@ public class Driver {
 			row = promptForValidValue(1,9);
 			System.out.format("Please enter which col: %n");
 			col = promptForValidValue(1,9);
+						
+			if(!gamePlayer.getGameInstance().isLockedAt(row, col)) {
+				exit = true;
+			} else {
+				System.out.format("That value is not user-editable.");
+				//--------
+				System.out.println("You selected" + gamePlayer.getGameInstance().getBoard().getValueAt(col, row));
+				System.out.format("(1,1) = %s, (2,1) = %s, (3,1) = %s, (4,1) = %s%n",gamePlayer.getGameInstance().getBoard().getValueAt(1, 1),
+						gamePlayer.getGameInstance().getBoard().getValueAt(2, 1),
+						gamePlayer.getGameInstance().getBoard().getValueAt(3, 1),
+						gamePlayer.getGameInstance().getBoard().getValueAt(4, 1));
+				//--------
+			}
 			System.out.format("Please enter what value: %n");
 			value = promptForValidValue(1,9);
-			
-			if(!gamePlayer.getGameInstance().isLockedAt(col, row))
-				exit = true;
-			else
-				System.out.format("That value is not user-editable.");
 		}
 		gamePlayer.getGameInstance().pencilInAt(col, row, value);		
 	}
@@ -159,6 +167,13 @@ public class Driver {
 				exit = true;
 			else
 				System.out.format("That value is not user-editable.");
+			//--------
+			System.out.println("You selected" + gamePlayer.getGameInstance().getBoard().getValueAt(col, row));
+			System.out.format("(1,1) = %s, (2,1) = %s, (3,1) = %s, (4,1) = %s%n",gamePlayer.getGameInstance().getBoard().getValueAt(1, 1),
+					gamePlayer.getGameInstance().getBoard().getValueAt(2, 1),
+					gamePlayer.getGameInstance().getBoard().getValueAt(3, 1),
+					gamePlayer.getGameInstance().getBoard().getValueAt(4, 1));
+			//--------
 		}
 		gamePlayer.getGameInstance().markNumberInPen(col, row, value);		
 	}

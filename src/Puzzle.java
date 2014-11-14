@@ -2,6 +2,8 @@
 
 //Put name at top if you contributed^ 
 
+import java.util.Random;
+
 public class Puzzle {
 	
 	protected int numberHints;
@@ -120,6 +122,7 @@ public class Puzzle {
 		
 	protected PlayBoard basePlayBoard() {//Debugging and testing only
 		PlayBoard defaultBoard = new PlayBoard(null, null, 9, 9);
+		Random random = new Random();
 		int[][] examplePattern = 
 			{
 			{1,4,7,  2,5,8,  3,6,9},
@@ -138,7 +141,7 @@ public class Puzzle {
 		PlayCell[][] defaultCells = new PlayCell[9][9];
 		for(int ii = 0; ii < defaultCells.length; ii++) {
 			for(int ix = 0; ix < defaultCells[0].length; ix++) {
-				defaultCells[ii][ix] = new PlayCell(examplePattern[ii][ix], ((int) (Math.random()*10)) == 5 || ((int) (Math.random()*10)) == 6, defaultCells.length);
+				defaultCells[ii][ix] = new PlayCell(examplePattern[ii][ix], random.nextBoolean(), defaultCells.length);
 			}
 		}
 		

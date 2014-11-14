@@ -193,17 +193,13 @@ public class PlayBoard {
 	
 	public String toString() {
 		String result = "";
-		char lockState;
+		
 		for(int iY = 0; iY < this.getBoardDimension(); iY++) {
 			for(int iX = 0; iX < this.getBoardDimension(); iX++) {
-				if(this.getCell(iX, iY).isLocked()) {
-					lockState = 'L';
-				} else {
-					lockState = 'O';
-				}
-				result = result + " [" + this.getCell(iX, iY).getValue() + "-" + lockState + "]";
+				
+				result += this.getCell(iX, iY).toString();
 			}
-			result = result + "\n";
+			result += "\n";
 		}
 		return result;
 	}//tested

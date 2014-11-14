@@ -7,13 +7,13 @@ public class PlayCell {
 	private boolean fixedValue;//game generated values for cells cannot be changed
 	private boolean[] pencilArray;//index equals value, true means number is penciled in	
 		
-	public PlayCell(int cellValue, boolean isCellfixed, int upperBoundOfEntry) {
-		this.value = cellValue;
-		this.fixedValue = false;
+	public PlayCell(int correctValue, boolean isLocked, int upperBoundOfEntry) {
+		this.value = correctValue;
+		this.fixedValue = isLocked;
 		this.pencilArray = getClearedPencilArray();
 		PlayCell.highestNumber = upperBoundOfEntry;
 	}
-	
+		
 	public void pencilIn(int num) {
 		this.pencilArray[num - 1] = true;
 	}
@@ -44,6 +44,13 @@ public class PlayCell {
 	
 	public void clearPencil() {
 		this.pencilArray = getClearedPencilArray();
+	}
+	
+	public String toString() {
+		if(this.isLocked()) {
+			return String.format("[%s]", this.getValue());
+		}
+		return "[ ]";
 	}
 //--------------------------------
 }
