@@ -3,12 +3,18 @@
 //Put name at top if you contributed^ 
 public class PlayCell {
 	private static int highestNumber = 9;//highest number to penciled in, ie. 9.
-	private int value;//letters for larger boards could be stored as ints > 9
+	private int correctValue;//letters for larger boards could be stored as ints > 9
+	private int penValue;
 	private boolean fixedValue;//game generated values for cells cannot be changed
 	private boolean[] pencilArray;//index equals value, true means number is penciled in	
 		
 	public PlayCell(int correctValue, boolean isLocked, int upperBoundOfEntry) {
-		this.value = correctValue;
+		this.correctValue = correctValue;
+		if(isLocked) {
+			penValue = correctValue;
+		} else {
+			penValue = 0;
+		}
 		this.fixedValue = isLocked;
 		this.pencilArray = getClearedPencilArray();
 		PlayCell.highestNumber = upperBoundOfEntry;
@@ -23,11 +29,15 @@ public class PlayCell {
 	}	
 	
 	public void writeInPen(int number) {
-		this.value = number;
+		this.penValue = number;
 	}
 	
-	public int getValue() {
-		return this.value;
+	public int getPenValue() {
+		return this.penValue;
+	}
+	
+	public int getCorrectValue() {
+		return this.correctValue;
 	}
 	
 	public boolean isLocked() {
@@ -47,10 +57,17 @@ public class PlayCell {
 	}
 	
 	public String toString() {
-		if(this.isLocked()) {
-			return String.format("[%s]", this.getValue());
-		}
-		return "[ ]";
+		if(!this.isLocked())
+			return String.format("|%s|", this.getPenValue());
+		else
+			return String.format("[%s]", this.getPenValue());
+	}
+	
+	public String isPenciled(int number) {//returns the number if it is in Pencil array, whitespace if not
+		if(this.pencilArray[number] == true)
+			return Integer.toString(number);
+		else 
+			return " ";
 	}
 //--------------------------------
 }

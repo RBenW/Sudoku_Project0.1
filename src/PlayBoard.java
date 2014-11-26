@@ -58,24 +58,24 @@ public class PlayBoard {
 	public int numberIncorrect() {
 		int result = 0;
 		for(int ii = 0; ii < getBoardDimension(); ii++) {
-			for(int ix = 0; ii < getBoardDimension(); ii++) {
-				if(BoardPattern[ii][ix].getValue() == SolutionPattern[ii][ix]) 
+			for(int icolumn = 0; ii < getBoardDimension(); ii++) {
+				if(BoardPattern[ii][icolumn].getPenValue() == SolutionPattern[ii][icolumn]) 
 					result++;
 			}
 		}
 		return result;
 	}
 	
-	private void setCell(int X, int Y, PlayCell value) {
-		this.BoardPattern[Y][X] = value;
+	private void setCell(int row, int column, PlayCell value) {
+		this.BoardPattern[row][column] = value;
 	}//tested
 	
-	private PlayCell getCell(int X, int Y) {
-		return this.BoardPattern[Y][X];
+	private PlayCell getCell(int column, int row) {
+		return this.BoardPattern[row - 1][column - 1];
 	}//tested
 	
-	public int getSolutionAt(int X, int Y) {
-		return this.SolutionPattern[Y][X];
+	public int getSolutionAt(int column, int row) {
+		return this.SolutionPattern[row - 1][column - 1];
 	}//tested
 	
 	private PlayCell[] getRow(int row) {
@@ -99,13 +99,13 @@ public class PlayBoard {
 	*/
 	private PlayCell[] getChunk(int chunk) {
 		PlayCell[] chunkArray = new PlayCell[this.getBoardDimension()];
-		int startingX = (chunk - 1) % this.getChunkDimension() * this.getChunkDimension();
-		int startingY = (chunk - 1) / this.getChunkDimension() * this.getChunkDimension();
+		int startingcolumn = (chunk - 1) % this.getChunkDimension() * this.getChunkDimension();
+		int startingrow = (chunk - 1) / this.getChunkDimension() * this.getChunkDimension();
 		
 		int index = 0;
-		for(int iY = startingY; iY < startingY + this.getChunkDimension(); iY++) {
-			for(int iX = startingX; iX < startingX + this.getChunkDimension(); iX++) {
-				chunkArray[index] = getCell(iX, iY);
+		for(int irow = startingrow; irow < startingrow + this.getChunkDimension(); irow++) {
+			for(int icolumn = startingcolumn; icolumn < startingcolumn + this.getChunkDimension(); icolumn++) {
+				chunkArray[index] = getCell(icolumn, irow);
 				index++;
 			}
 		}
@@ -160,12 +160,12 @@ public class PlayBoard {
 	
 	public String validityString() {
 		String result = "";
-		result += String.format("R = row, C = column, S = section%n");
+		result += String.format("R = row, C = column, S = section\n");
 		for(int ii = 0; ii < 9; ii++) {
-			result += String.format("R%s: %4s, C%s: %4s, S%s: %4s%n", ii, this.validRow(ii), ii, this.validColumn(ii), ii+1, this.validChunk(ii + 1));
+			result += String.format("R%s: %4s, C%s: %4s, S%s: %4s\n", ii, this.validRow(ii), ii, this.validColumn(ii), ii+1, this.validChunk(ii + 1));
 		}
 		
-		result += String.format("Board: %s%n%n", this.validBoard());
+		result += String.format("Board: %s\n\n", this.validBoard());
 		
 		result += this.toString();
 		return result;
@@ -185,7 +185,7 @@ public class PlayBoard {
 	private int countInArray(int target, PlayCell[] array) {
 		int count = 0;
 		for(int ii = 0; ii < array.length; ii++) {
-			if(array[ii].getValue() == target)
+			if(array[ii].getPenValue() == target)
 				count++;
 		}
 		return count;
@@ -194,10 +194,10 @@ public class PlayBoard {
 	public String toString() {
 		String result = "";
 		
-		for(int iY = 0; iY < this.getBoardDimension(); iY++) {
-			for(int iX = 0; iX < this.getBoardDimension(); iX++) {
+		for(int irow = 1; irow < this.getBoardDimension(); irow++) {
+			for(int icolumn = 1; icolumn < this.getBoardDimension(); icolumn++) {
 				
-				result += this.getCell(iX, iY).toString();
+				result += this.getCell(icolumn, irow).toString();
 			}
 			result += "\n";
 		}
@@ -208,28 +208,28 @@ public class PlayBoard {
 	//Methods to work with playCell and maintain encapsulation
 	//----------------------------------------------------------------
 	
-	public void pencilInAt(int X, int Y, int value) {
-		this.getCell(X, Y).pencilIn(value);
+	public void pencilInAt(int column, int row, int value) {
+		this.getCell(column, row).pencilIn(value);
 	}	
 	
-	public void eraseAt(int X, int Y, int value) {
-		this.getCell(X, Y).erase(value);
+	public void eraseAt(int column, int row, int value) {
+		this.getCell(column, row).erase(value);
 	}
 	
-	public int getValueAt(int X, int Y) {
-		return this.getCell(X, Y).getValue();
+	public int getValueAt(int column, int row) {
+		return this.getCell(column, row).getPenValue();
 	}
 	
-	public void writeInPenAt(int X, int Y, int value) {
-		this.getCell(X, Y).writeInPen(value);
+	public void writeInPenAt(int column, int row, int value) {
+		this.getCell(column, row).writeInPen(value);
 	}
 	
-	public boolean isLockedAt(int X, int Y) {
-		return this.getCell(X, Y).isLocked();
+	public boolean isLockedAt(int column, int row) {
+		return this.getCell(column, row).isLocked();
 	}
 	
-	public void clearPencilAt(int X, int Y) {
-		this.getCell(X, Y).clearPencil();
+	public void clearPencilAt(int column, int row) {
+		this.getCell(column, row).clearPencil();
 	}
 	
 	//----------------------------------------------------------------
@@ -295,5 +295,19 @@ public class PlayBoard {
 		}
 		return newArray;
 	}//tested
+
+	private String isPenciled(int row, int column, int number) {
+		if(this.getCell(row, column).getPenValue() > 0)
+			return " ";
+		else
+			return this.getCell(row, column).isPenciled(number);
+	}
+	
+	private String getPenOrPencil(int row, int column) {
+		if(this.getCell(row, column).getPenValue() > 0)
+			return Integer.toString(this.getCell(row, column).getPenValue());
+		else
+			return this.getCell(row, column).isPenciled(5);
+	}
 	
 }
