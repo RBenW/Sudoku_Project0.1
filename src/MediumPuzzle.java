@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //Ben Wagner
 
 //Put name at top if you contributed^ 
@@ -9,12 +11,8 @@ public class MediumPuzzle extends Puzzle {
 	private int timeLimit = 10;
 	private int difficultyRating = 2;
 	
-	public MediumPuzzle() {
+	public MediumPuzzle() throws IOException {
 		super();
 	}
 	
-	public MediumPuzzle(String filename) {
-		super();
-		this.board = importPlayBoard(filename);
-	}
 }

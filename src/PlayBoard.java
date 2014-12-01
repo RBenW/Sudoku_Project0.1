@@ -194,8 +194,8 @@ public class PlayBoard {
 	public String toString() {
 		String result = "";
 		
-		for(int irow = 1; irow < this.getBoardDimension(); irow++) {
-			for(int icolumn = 1; icolumn < this.getBoardDimension(); icolumn++) {
+		for(int irow = 1; irow < this.getBoardDimension() + 1; irow++) {
+			for(int icolumn = 1; icolumn < this.getBoardDimension() + 1; icolumn++) {
 				
 				result += this.getCell(icolumn, irow).toString();
 			}

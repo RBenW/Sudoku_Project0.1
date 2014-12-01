@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //Ben Wagner
 
 //Put name at top if you contributed^ 
@@ -9,11 +11,11 @@ public class EvilPuzzle extends Puzzle {
 	private int timeLimit = 10;
 	private int difficultyRating = 4;
 	
-	public EvilPuzzle() {
+	public EvilPuzzle() throws IOException {
 		super();
 	}
 	
-	public EvilPuzzle(String filename) {
+	public EvilPuzzle(String filename) throws IOException {
 		super();
 		this.board = importPlayBoard(filename);
 	}

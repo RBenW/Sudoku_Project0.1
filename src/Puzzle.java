@@ -2,29 +2,40 @@
 
 //Put name at top if you contributed^ 
 
+import java.awt.Component;
+import java.awt.Container;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Puzzle {
 	
 	protected int numberHints;
 	protected PlayBoard board;
-	protected String difficulty;
+	protected static String difficulty;
 	protected int difficultyRating;
 	protected long timeLimit;
 	protected long startTime;
 	protected boolean timeLeft;
 	
-	public Puzzle() {
-		this.board = new PlayBoard();
+	public Puzzle() throws IOException {
+		this.board = loadPuzzle();
 		this.startTime = System.currentTimeMillis();
 		this.timeLeft = true;
 	}
 	
-	public Puzzle(String filename) {
-		this.board = importPlayBoard(filename);
-		this.startTime = System.currentTimeMillis();
-		this.timeLeft = true;
+	protected void setDifficulty(String difficultyString) {
+		this.difficulty = difficultyString;
 	}
+	
+	protected String getDifficulty() { 
+		return this.difficulty;
+	}
+	
 	
 	//----------------------------------------------------------------
 	//Methods original to this level of architecture
@@ -149,5 +160,72 @@ public class Puzzle {
 		defaultBoard.setBoardPattern(defaultCells);
 		
 		return defaultBoard;
+	}
+
+
+public PlayBoard loadPuzzle() throws IOException {
+	PlayBoard newBoard = new PlayBoard(null, null, 9, 9);
+	PlayCell[][] newBoard_Puzzle = new PlayCell[9][9];
+	int[][] newBoard_Solution = new int[9][9];
+	
+	Random rand = new Random(1);
+	String filename = String.format("src/%s/%s_%s.txt",difficulty,difficulty,Integer.toString(rand.nextInt(4) + 1));
+	
+	try {
+		JPanel the_grid = new JPanel();
+	
+			FileReader fr = new FileReader (filename);  //load in specified file
+			BufferedReader in = new BufferedReader (fr);
+			String line;
+			
+			for(int ii = 0; ii < 9; ii++) {
+				line = in.readLine();
+				if (line == null) throw new IOException ("Premature EOF");
+				
+				for(int ix = 0; ix < 9; ix++) {
+					String value = Character.toString(line.charAt(ix));
+					newBoard_Solution[ii][ix] = Integer.parseInt(value);
+				}
+				
+				newBoard.setSolutionPattern(newBoard_Solution);
+				
+				for(int ix = 0; ix < newBoard_Puzzle[0].length; ix++) {
+					newBoard_Puzzle[ii][ix] = new PlayCell(newBoard_Solution[ii][ix], line.charAt(ix) != '0', newBoard_Puzzle.length);
+				}
+				
+				newBoard.setBoardPattern(newBoard_Puzzle);
+				
+			
+				
+			}
+			
+			/*
+			Component [] panels = the_grid.getComponents();
+			for (Component c : panels) {
+				Component[] texts = ((Container) c).getComponents();
+				line = in.readLine();
+				if (line == null) throw new IOException ("Premature EOF");
+				int i = 0;
+				for (Component t :texts ) {
+					String value = new String (line.substring(i,i+1));
+					if (value.equals("0")) 
+					{
+						value = "";
+						((JTextField) t).setEditable(true);
+					}
+					else
+					{
+						((JTextField) t).setText(value);
+						((JTextField) t).setEditable(false);
+					}
+					((JTextField) t).setBackground(saved_bg);
+					i++;
+				}
+				}
+				*/
+		} finally {
+			System.out.println("Problem");
+		}
+	return newBoard;
 	}
 }

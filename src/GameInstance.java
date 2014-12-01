@@ -1,3 +1,13 @@
+import java.awt.Component;
+import java.awt.Container;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Random;
+
+
+import javax.swing.JTextField;
+
 //Ben Wagner
 
 //Put name at top if you contributed^ 
@@ -11,8 +21,8 @@ public class GameInstance { //="SudokuProgram"
 		this.gamePuzzle = null;
 	}
 	
-	public GameInstance(int difficultyLevel, String boardFileName) {
-		this.gamePuzzle = getPuzzleForDifficulty(difficultyLevel, boardFileName);
+	public GameInstance(int difficultyLevel) throws IOException {
+		this.gamePuzzle = getPuzzleForDifficulty(difficultyLevel);
 		this.gameHints = resetHints();
 	}
 	
@@ -20,12 +30,12 @@ public class GameInstance { //="SudokuProgram"
 	//Methods original to this level of architecture
 	//----------------------------------------------------------------
 	
-	private Puzzle getPuzzleForDifficulty(int difficultyLevel, String boardFileName) {
+	private Puzzle getPuzzleForDifficulty(int difficultyLevel) throws IOException {
 		switch (difficultyLevel) {
-			case 1: return new EasyPuzzle(boardFileName);
-			case 2: return new MediumPuzzle(boardFileName);
-			case 3: return new HardPuzzle(boardFileName);
-			case 4: return new EvilPuzzle(boardFileName);
+			case 1: return new EasyPuzzle();
+			case 2: return new MediumPuzzle();
+			case 3: return new HardPuzzle();
+			case 4: return new EvilPuzzle();
 			default: return null;
 		}
 		
@@ -147,4 +157,6 @@ public class GameInstance { //="SudokuProgram"
 	public void clearPencil(int X, int Y) {
 		this.gamePuzzle.board.clearPencilAt(X, Y);
 	}		
+	
+	
 }

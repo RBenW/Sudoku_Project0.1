@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //Ben Wagner
 
 //Put name at top if you contributed^ 
@@ -14,18 +16,14 @@ public class Player {
 		this.gameInstance = null;
 	}
 	
-	public Player(String playerName, String playerGamerTag, int difficultyLevel) {
+	public Player(String playerName, String playerGamerTag, int difficultyLevel) throws IOException {
 		this.name = playerName;
 		this.gamerTag = playerGamerTag;
-		this.gameInstance = new GameInstance(difficultyLevel, getFileName(difficultyLevel));
+		this.gameInstance = new GameInstance(difficultyLevel);
 	}
 	
 	public GameInstance getGameInstance() {
 		return this.gameInstance;
-	}
-	
-	public String getFileName(int difficultyLevel) {//gets a file name to pull puzzle from
-		return null;
 	}
 	
 	public void useHint(int hintNumber){

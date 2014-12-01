@@ -1,15 +1,69 @@
 //Ben Wagner
 
 //Put name at top if you contributed^
+import java.awt.AWTKeyStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.BitSet;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-public class Driver {
+import javax.swing.BorderFactory;
+import javax.swing.InputVerifier;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Driver extends JPanel implements ActionListener {
 	static Player gamePlayer;
 	static int hintNumber = 1;
+	static JFrame sudokuFrame;
+	static JTextField[][] sudokuFields; 
 	
-	public static void main(String[] args) {
-		String name;
-		int difficultyLevel = 0;
+	private static final long serialVersionUID = 1L;
+	static  GridBagConstraints gbc = new GridBagConstraints();
+	static JPanel the_grid = new JPanel();
+	static JTextArea status_pane = new JTextArea ();
+	static int board [] [] = new int [9] [9] ;
+	static BitSet [] [] bits = new BitSet [9] [9];
+	boolean loaded_flag = false, stuck = false, full_rescan = false, phase_one_complete = false;
+	int todo = 0, progress = 0;
+	int me_x = 0, me_y = 0;
+	static Color saved_bg;
+	Color my_blue = new Color (200, 200, 255);
+	Color different_blue = new Color (150, 190, 250);
+	Color my_green = new Color (200, 255, 200);
+	Color my_red = new Color (255, 180, 180);
+	int debug_level = 0;
+	static final boolean DEBUG = false;
+	static JFrame the_frame;		// So we can get hold of title and change it.
+
+	
+	public static void main(String[] args) throws IOException {
+		String name="Bob";
+		int difficultyLevel = 1;
+		sudokuFrame = new JFrame("Sudoku Game");
+		
+	
 		
 		Scanner myScanner = new Scanner(System.in);
 		String input = "";
@@ -21,21 +75,30 @@ public class Driver {
 			System.out.format("Please enter your name%n");
 			name = myScanner.nextLine();
 		}
-		System.out.format("%nWhat difficulty level would you like to play?%n (1=easy, 2=medium, 3=hard, 4=evil)%n%n");
+	System.out.format("%nWhat difficulty level would you like to play?%n (1=easy, 2=medium, 3=hard, 4=evil)%n%n");
 		difficultyLevel = promptForValidValue(1,4);
 		
 		gamePlayer = new Player(name, getTag(name), difficultyLevel);
 		System.out.println(gamePlayer.getGameInstance().getBoard().toString());
+		
+		
 		while(!gamePlayer.getGameInstance().hasWonGame()) {
 			promptForMove(gamePlayer);
-			System.out.println(gamePlayer.getGameInstance().getBoard().toString());
+			System.out.println(gamePlayer.getGameInstance().getBoard().toString());	
 		}
 		
-		
+
 		
 		myScanner.close();
 	}
 	
+	
+
+
+
+
+
+
 	//----------------------------------------------------------------
 	//The following methods are for the driver
 	//----------------------------------------------------------------
@@ -44,6 +107,7 @@ public class Driver {
 		
 		return "Bob";
 	}
+
 	
 	public static int promptForValidValue(int lowerBound, int upperBound) {
 		Scanner scan = new Scanner(System.in);
@@ -201,13 +265,12 @@ public class Driver {
 		gamePlayer.useHint(hintNumber);	
 		hintNumber++;
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-}
