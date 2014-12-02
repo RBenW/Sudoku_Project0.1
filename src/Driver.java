@@ -79,6 +79,7 @@ public class Driver extends JPanel implements ActionListener {
 		difficultyLevel = promptForValidValue(1,4);
 		
 		gamePlayer = new Player(name, getTag(name), difficultyLevel);
+		
 		System.out.println(gamePlayer.getGameInstance().getBoard().toString());
 		
 		
