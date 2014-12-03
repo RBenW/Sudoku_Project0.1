@@ -59,6 +59,8 @@ public class New_GUI implements ActionListener {
 	private JTextField textUser;
 	private JTextArea selected2;
 	private JTextField noUserText;
+	JTextArea[][] CellArea = new JTextArea[9][9];
+	Player gamePlayer;
 
 	/**
 	 * Launch the application.
@@ -233,6 +235,88 @@ public class New_GUI implements ActionListener {
 		final JTextArea Cell_9_7 = new JTextArea();
 		final JTextArea Cell_9_8 = new JTextArea();
 		final JTextArea Cell_9_9 = new JTextArea();
+		
+		CellArea[0][0] = Cell_1_1;
+		CellArea[0][1] = Cell_1_2;
+		CellArea[0][2] = Cell_1_3;
+		CellArea[0][3] = Cell_1_4;
+		CellArea[0][4] = Cell_1_5;
+		CellArea[0][5] = Cell_1_6;
+		CellArea[0][6] = Cell_1_7;
+		CellArea[0][7] = Cell_1_8;
+		CellArea[0][8] = Cell_1_9;
+		CellArea[1][0] = Cell_2_1;
+		CellArea[1][1] = Cell_2_2;
+		CellArea[1][2] = Cell_2_3;
+		CellArea[1][3] = Cell_2_4;
+		CellArea[1][4] = Cell_2_5;
+		CellArea[1][5] = Cell_2_6;
+		CellArea[1][6] = Cell_2_7;
+		CellArea[1][7] = Cell_2_8;
+		CellArea[1][8] = Cell_2_9;
+		CellArea[2][0] = Cell_3_1;
+		CellArea[2][1] = Cell_3_2;
+		CellArea[2][2] = Cell_3_3;
+		CellArea[2][3] = Cell_3_4;
+		CellArea[2][4] = Cell_3_5;
+		CellArea[2][5] = Cell_3_6;
+		CellArea[2][6] = Cell_3_7;
+		CellArea[2][7] = Cell_3_8;
+		CellArea[2][8] = Cell_3_9;
+		CellArea[3][0] = Cell_4_1;
+		CellArea[3][1] = Cell_4_2;
+		CellArea[3][2] = Cell_4_3;
+		CellArea[3][3] = Cell_4_4;
+		CellArea[3][4] = Cell_4_5;
+		CellArea[3][5] = Cell_4_6;
+		CellArea[3][6] = Cell_4_7;
+		CellArea[3][7] = Cell_4_8;
+		CellArea[3][8] = Cell_4_9;
+		CellArea[4][0] = Cell_5_1;
+		CellArea[4][1] = Cell_5_2;
+		CellArea[4][2] = Cell_5_3;
+		CellArea[4][3] = Cell_5_4;
+		CellArea[4][4] = Cell_5_5;
+		CellArea[4][5] = Cell_5_6;
+		CellArea[4][6] = Cell_5_7;
+		CellArea[4][7] = Cell_5_8;
+		CellArea[4][8] = Cell_5_9;
+		CellArea[5][0] = Cell_6_1;
+		CellArea[5][1] = Cell_6_2;
+		CellArea[5][2] = Cell_6_3;
+		CellArea[5][3] = Cell_6_4;
+		CellArea[5][4] = Cell_6_5;
+		CellArea[5][5] = Cell_6_6;
+		CellArea[5][6] = Cell_6_7;
+		CellArea[5][7] = Cell_6_8;
+		CellArea[5][8] = Cell_6_9;
+		CellArea[6][0] = Cell_7_1;
+		CellArea[6][1] = Cell_7_2;
+		CellArea[6][2] = Cell_7_3;
+		CellArea[6][3] = Cell_7_4;
+		CellArea[6][4] = Cell_7_5;
+		CellArea[6][5] = Cell_7_6;
+		CellArea[6][6] = Cell_7_7;
+		CellArea[6][7] = Cell_7_8;
+		CellArea[6][8] = Cell_7_9;
+		CellArea[7][0] = Cell_8_1;
+		CellArea[7][1] = Cell_8_2;
+		CellArea[7][2] = Cell_8_3;
+		CellArea[7][3] = Cell_8_4;
+		CellArea[7][4] = Cell_8_5;
+		CellArea[7][5] = Cell_8_6;
+		CellArea[7][6] = Cell_8_7;
+		CellArea[7][7] = Cell_8_8;
+		CellArea[7][8] = Cell_8_9;
+		CellArea[8][0] = Cell_9_1;
+		CellArea[8][1] = Cell_9_2;
+		CellArea[8][2] = Cell_9_3;
+		CellArea[8][3] = Cell_9_4;
+		CellArea[8][4] = Cell_9_5;
+		CellArea[8][5] = Cell_9_6;
+		CellArea[8][6] = Cell_9_7;
+		CellArea[8][7] = Cell_9_8;
+		CellArea[8][8] = Cell_9_9;
 
 		Cell_1_1.setLineWrap(true);
 		Cell_1_1.setEditable(false);
@@ -2680,15 +2764,22 @@ public class New_GUI implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					Player gamePlayer = new Player(userName, getTag(userName), 1);
+					gamePlayer = new Player(userName, getTag(userName), 1);
+							for(int ii = 0; ii < 8; ii++) {
+								for(int i2 = 0; i2 < 8; i2++) {
+									CellArea[ii][i2].setText(gamePlayer.getGameInstance().getBoard().getValueAsString(ii,i2));
+								}
+							}
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				GamePanel.setVisible(true);
 				DifficultyPanel.setVisible(false);
 			}
 		});
+				
+
+		
 		btnEasy.setBounds(184, 150, 170, 47);
 		DifficultyPanel.add(btnEasy);
 

@@ -220,6 +220,13 @@ public class PlayBoard {
 		return this.getCell(column, row).getPenValue();
 	}
 	
+	public String getValueAsString(int colIndex, int rowIndex) {
+		if(this.BoardPattern[colIndex][rowIndex].getPenValue() > 0)
+			return Integer.toString(this.BoardPattern[colIndex][rowIndex].getPenValue());
+		else
+			return " ";
+	}
+	
 	public void writeInPenAt(int column, int row, int value) {
 		this.getCell(column, row).writeInPen(value);
 	}
