@@ -1,5 +1,6 @@
 import java.awt.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -44,6 +45,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class New_GUI implements ActionListener {
 	private String userName = "";
 	private JFrame frame;
@@ -53,7 +57,6 @@ public class New_GUI implements ActionListener {
 	private JPanel DifficultyPanel;
 	private JPanel EasyPuzzlePanel;
 	private JTextField textUser;
-	private JTextField textPUser;
 	private JTextArea selected2;
 	private JTextField noUserText;
 
@@ -86,7 +89,7 @@ public class New_GUI implements ActionListener {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 529, 467);
+		frame.setBounds(100, 100, 529, 515);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 
@@ -109,11 +112,6 @@ public class New_GUI implements ActionListener {
 		frame.getContentPane().add(DifficultyPanel, "name_371241815534654");
 		DifficultyPanel.setLayout(null);
 		DifficultyPanel.setVisible(false);
-
-		final JPanel EasyPuzzlePanel = new JPanel();
-		frame.getContentPane().add(EasyPuzzlePanel, "name_371243849815857");
-		EasyPuzzlePanel.setLayout(null);
-		EasyPuzzlePanel.setVisible(false);
 
 		final JPanel GamePanel = new JPanel();
 		GamePanel.setBackground(new Color(0, 102, 51));
@@ -141,7 +139,8 @@ public class New_GUI implements ActionListener {
 		GamePanel.add(label_4);
 
 		JPanel PuzzlePanel = new JPanel();
-		PuzzlePanel.setBounds(116, 69, 270, 270);
+		PuzzlePanel.setBorder(new LineBorder(new Color(255, 200, 0), 2));
+		PuzzlePanel.setBounds(66, 55, 375, 375);
 		GamePanel.add(PuzzlePanel);
 		PuzzlePanel.setLayout(new GridLayout(9, 9, 0, 0));
 
@@ -2184,11 +2183,12 @@ public class New_GUI implements ActionListener {
 		pencil.setIcon(new ImageIcon(img));
 		Image img2 = new ImageIcon(this.getClass().getResource("/pencil.png")).getImage(); //set pencil image
 		pencil.setSelectedIcon(new ImageIcon(img2));
-		pencil.setBounds(421, 345, 45, 39);
+		pencil.setBounds(421, 436, 45, 39);
 		GamePanel.add(pencil);
 		GamePanel.setVisible(false);
 		
 		JButton btn1 = new JButton("");
+		btn1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn1.setBackground(new Color(153, 102, 0));
 		Image num1 = new ImageIcon(this.getClass().getResource("/1.png")).getImage(); //set button 1 image
 		btn1.setIcon(new ImageIcon(num1));
@@ -2196,8 +2196,76 @@ public class New_GUI implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				if (selected2.isEnabled() == true){	
 					if (pencil.isSelected()!= true){
-						selected2.setFont(new Font("Times New Roman", Font.BOLD, 18));
-						selected2.setText(Integer.toString(1));
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(1));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						//selected2.setFont(new Font("Times New Roman", Font.PLAIN, 10));
+						String nums = selected2.getText();
+						if(nums.contains("1")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(1)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn1.setBounds(43, 436, 39, 39);
+		GamePanel.add(btn1);
+		
+		JButton btn2 = new JButton("");
+		btn2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btn2.setBackground(new Color(153, 102, 0));
+		Image num2 = new ImageIcon(this.getClass().getResource("/2.png")).getImage(); //set button 2 image
+		btn2.setIcon(new ImageIcon(num2));
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(2));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						//selected2.setFont(new Font("Times New Roman", Font.PLAIN, 10));
+						String nums = selected2.getText();
+						if(nums.contains("2")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(2)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn2.setBounds(85, 436, 39, 39);
+		GamePanel.add(btn2);
+		
+		JButton btn3 = new JButton("");
+		btn3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btn3.setBackground(new Color(153, 102, 0));
+		Image num3 = new ImageIcon(this.getClass().getResource("/3.png")).getImage(); //set button 3 image
+		btn3.setIcon(new ImageIcon(num3));
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(3));
 						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
 						selected2.setBackground(Color.LIGHT_GRAY);
 						selected2.setDisabledTextColor(Color.BLACK);
@@ -2205,84 +2273,242 @@ public class New_GUI implements ActionListener {
 					}
 					else{
 						String nums = selected2.getText();
-						if(nums.contains("1")){
+						if(nums.contains("3")){
 						}	
 						else{
-						selected2.setText(nums+Integer.toString(1)+ " ");
+						selected2.setText(nums+Integer.toString(3)+ "  ");
 						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
-						selected2.setBackground(Color.CYAN);
+						selected2.setBackground(Color.WHITE);
 						selected2.setEditable(false);
 						}
 					}
 				}
 			}
 		});
-		btn1.setBounds(43, 345, 39, 39);
-		GamePanel.add(btn1);
-		
-		JButton btn2 = new JButton("");
-		btn2.setBackground(new Color(153, 102, 0));
-		Image num2 = new ImageIcon(this.getClass().getResource("/2.png")).getImage(); //set button 2 image
-		btn2.setIcon(new ImageIcon(num2));
-		btn2.setBounds(85, 345, 39, 39);
-		GamePanel.add(btn2);
-		
-		JButton btn3 = new JButton("");
-		btn3.setBackground(new Color(153, 102, 0));
-		Image num3 = new ImageIcon(this.getClass().getResource("/3.png")).getImage(); //set button 3 image
-		btn3.setIcon(new ImageIcon(num3));
-		btn3.setBounds(127, 345, 39, 39);
+		btn3.setBounds(127, 436, 39, 39);
 		GamePanel.add(btn3);
 		
 		JButton btn4 = new JButton("");
+		btn4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn4.setBackground(new Color(153, 102, 0));
 		Image num4 = new ImageIcon(this.getClass().getResource("/4.png")).getImage(); //set button 4 image
 		btn4.setIcon(new ImageIcon(num4));
-		btn4.setBounds(169, 345, 39, 39);
+		btn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(4));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("4")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(4)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn4.setBounds(169, 436, 39, 39);
 		GamePanel.add(btn4);
 		
 		JButton btn5 = new JButton("");
+		btn5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn5.setBackground(new Color(153, 102, 0));
 		Image num5 = new ImageIcon(this.getClass().getResource("/5.png")).getImage(); //set button 5 image
 		btn5.setIcon(new ImageIcon(num5));
-		btn5.setBounds(211, 345, 39, 39);
+		btn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(5));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("5")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(5)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn5.setBounds(211, 436, 39, 39);
 		GamePanel.add(btn5);
 		
 		JButton btn6 = new JButton("");
+		btn6.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn6.setBackground(new Color(153, 102, 0));
 		Image num6 = new ImageIcon(this.getClass().getResource("/6.png")).getImage(); //set button 6 image
 		btn6.setIcon(new ImageIcon(num6));
-		btn6.setBounds(253, 345, 39, 39);
+		btn6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(6));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("6")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(6)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn6.setBounds(253, 436, 39, 39);
 		GamePanel.add(btn6);
 		
 		JButton btn7 = new JButton("");
+		btn7.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn7.setBackground(new Color(153, 102, 0));
 		Image num7 = new ImageIcon(this.getClass().getResource("/7.png")).getImage(); //set button 7 image
 		btn7.setIcon(new ImageIcon(num7));
-		btn7.setBounds(295, 345, 39, 39);
+		btn7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(7));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("7")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(7)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn7.setBounds(295, 436, 39, 39);
 		GamePanel.add(btn7);
 		
 		JButton btn8 = new JButton("");
+		btn8.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn8.setBackground(new Color(153, 102, 0));
 		Image num8 = new ImageIcon(this.getClass().getResource("/8.png")).getImage(); //set button 8 image
 		btn8.setIcon(new ImageIcon(num8));
-		btn8.setBounds(337, 345, 39, 39);
+		btn8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(8));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("8")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(8)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn8.setBounds(337, 436, 39, 39);
 		GamePanel.add(btn8);
 		
 		JButton btn9 = new JButton("");
+		btn9.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btn9.setBackground(new Color(153, 102, 0));
 		Image num9 = new ImageIcon(this.getClass().getResource("/9.png")).getImage(); //set button 9 image
 		btn9.setIcon(new ImageIcon(num9));
-		btn9.setBounds(379, 345, 39, 39);
+		btn9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){	
+					if (pencil.isSelected()!= true){
+						selected2.setFont(new Font("Times New Roman", Font.BOLD, 28));
+						selected2.setText("  " + Integer.toString(9));
+						//selected2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+						selected2.setBackground(Color.LIGHT_GRAY);
+						selected2.setDisabledTextColor(Color.BLACK);
+						selected2.setEnabled(false);
+					}
+					else{
+						String nums = selected2.getText();
+						if(nums.contains("9")){
+						}	
+						else{
+						selected2.setText(nums+Integer.toString(9)+ "  ");
+						//selected2.setBorder(new LineBorder(Color.BLUE, 2));
+						selected2.setBackground(Color.WHITE);
+						selected2.setEditable(false);
+						}
+					}
+				}
+			}
+		});
+		btn9.setBounds(379, 436, 39, 39);
 		GamePanel.add(btn9);
+		
+		JButton btnEraser = new JButton("");
+		Image eraser = new ImageIcon(this.getClass().getResource("/eraser.png")).getImage(); //set button 9 image
+		btnEraser.setIcon(new ImageIcon(eraser));
+		btnEraser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected2.isEnabled() == true){
+					selected2.setText("");
+					selected2.setBackground(Color.WHITE);
+				}
+			}
+		});
+		btnEraser.setBounds(468, 436, 39, 39);
+		GamePanel.add(btnEraser);
 
 		final JPanel SolutionPanel = new JPanel();
 		frame.getContentPane().add(SolutionPanel, "name_371247993800605");
 		SolutionPanel.setVisible(false);
 
-		JButton btnEnter = new JButton("ENTER");
+		JButton btnEnter = new JButton("PLAY");
+		Image play = new ImageIcon(this.getClass().getResource("/play.png")).getImage(); //set button 9 image
+		btnEnter.setIcon(new ImageIcon(play));
 		btnEnter.setBackground(Color.ORANGE);
-		btnEnter.setForeground(Color.BLACK);
+		btnEnter.setForeground(new Color(0, 153, 0));
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserPanel.setVisible(true);
@@ -2291,22 +2517,28 @@ public class New_GUI implements ActionListener {
 		});
 		btnEnter.setBorder(new BevelBorder(BevelBorder.RAISED, null, null,
 				null, null));
-		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnEnter.setBounds(186, 217, 141, 47);
+		btnEnter.setFont(new Font("Yu Mincho", Font.BOLD | Font.ITALIC, 18));
+		btnEnter.setBounds(186, 355, 141, 47);
 		EnterPanel.add(btnEnter);
 
 		JLabel lblSudoku = new JLabel("SUDOKU");
 		lblSudoku.setForeground(Color.ORANGE);
 		lblSudoku.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSudoku.setFont(new Font("Yu Mincho", Font.ITALIC, 65));
-		lblSudoku.setBounds(95, 71, 322, 70);
+		lblSudoku.setFont(new Font("Yu Mincho", Font.BOLD | Font.ITALIC, 70));
+		lblSudoku.setBounds(71, 23, 383, 70);
 		EnterPanel.add(lblSudoku);
+		
+		JLabel imageLabel = new JLabel("");
+		Image enterImage = new ImageIcon(this.getClass().getResource("/SudokuIcon.png")).getImage(); //set image to label on enter screen
+		imageLabel.setIcon(new ImageIcon(enterImage));
+		imageLabel.setBounds(132, 88, 256, 256);
+		EnterPanel.add(imageLabel);
 
 		JLabel label = new JLabel("SUDOKU");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.ORANGE);
-		label.setFont(new Font("Yu Mincho", Font.ITALIC, 54));
-		label.setBounds(92, 18, 328, 47);
+		label.setFont(new Font("Yu Mincho", Font.BOLD | Font.ITALIC, 70));
+		label.setBounds(71, 23, 383, 70);
 		UserPanel.add(label);
 
 		JButton UPBackbutton = new JButton("<-Back");
@@ -2323,6 +2555,8 @@ public class New_GUI implements ActionListener {
 		UserPanel.add(UPBackbutton);
 
 		JButton btnRegisterUser = new JButton("Register");
+		btnRegisterUser.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnRegisterUser.setBackground(new Color(153, 102, 0));
 		btnRegisterUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textUserName.getText().isEmpty())
@@ -2340,43 +2574,54 @@ public class New_GUI implements ActionListener {
 					userName = newUserName;
 					textUser.setText(newUserName);
 					textUser.setEditable(false);
-					textPUser.setText(newUserName);
-					textPUser.setEditable(false);
 					DifficultyPanel.setVisible(true);
 					UserPanel.setVisible(false);
 				}
 			}
 		});
-		btnRegisterUser.setBounds(172, 191, 89, 23);
+		btnRegisterUser.setBounds(172, 203, 89, 23);
 		UserPanel.add(btnRegisterUser);
 
 		textUserName = new JTextField(15);
-		textUserName.setBounds(172, 160, 138, 20);
+		textUserName.setBounds(172, 172, 138, 20);
 		UserPanel.add(textUserName);
 		textUserName.setColumns(10);
 
 		JLabel lblNewUser = new JLabel("New User? Enter Username");
 		lblNewUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewUser.setForeground(Color.ORANGE);
-		lblNewUser.setBounds(172, 126, 219, 23);
+		lblNewUser.setBounds(172, 144, 219, 23);
 		UserPanel.add(lblNewUser);
 
 		JLabel lblChooseName = new JLabel("Already Registered?");
 		lblChooseName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblChooseName.setForeground(Color.ORANGE);
-		lblChooseName.setBounds(172, 225, 148, 14);
+		lblChooseName.setBounds(172, 237, 148, 14);
 		UserPanel.add(lblChooseName);
 
 		JLabel lblNewLabel_1 = new JLabel("Choose Username");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setForeground(Color.ORANGE);
-		lblNewLabel_1.setBounds(172, 243, 138, 14);
+		lblNewLabel_1.setBounds(172, 257, 138, 14);
 		UserPanel.add(lblNewLabel_1);
 
-		String[] users = { "Han Solo", "Darth Vader" };
-		JComboBox comboRegUsers = new JComboBox(users);
+		//String[] user1 = { "Han Solo", "Darth Vader" };
+		final JComboBox<String> comboRegUsers = new JComboBox<String>();
+		comboRegUsers.addItem("Han Solo");
+		comboRegUsers.addItem("Darth Vader");
+		comboRegUsers.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Object selectedUser = comboRegUsers.getSelectedItem();
+				userName = (String) selectedUser;
+				textUser.setText(userName);
+				textUser.setEditable(false);
+				DifficultyPanel.setVisible(true);
+				UserPanel.setVisible(false);
+			}
+		});
 		comboRegUsers.setEditable(false);
-		comboRegUsers.setBounds(172, 268, 138, 20);
+		comboRegUsers.setBounds(172, 282, 138, 20);
 		UserPanel.add(comboRegUsers);
 		
 		noUserText = new JTextField();
@@ -2384,15 +2629,21 @@ public class New_GUI implements ActionListener {
 		noUserText.setSelectedTextColor(Color.RED);
 		noUserText.setBorder(null);
 		noUserText.setBackground(new Color(0, 102, 51));
-		noUserText.setBounds(320, 160, 155, 20);
+		noUserText.setBounds(172, 313, 155, 20);
 		UserPanel.add(noUserText);
 		noUserText.setColumns(10);
+		
+		JLabel imageLabel2 = new JLabel("");
+		Image bambooImage = new ImageIcon(this.getClass().getResource("/bambooframe.png")).getImage(); //set image for username screen
+		imageLabel2.setIcon(new ImageIcon(bambooImage));
+		imageLabel2.setBounds(135, 104, 256, 320);
+		UserPanel.add(imageLabel2);
 
 		JLabel label_1 = new JLabel("SUDOKU");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.ORANGE);
-		label_1.setFont(new Font("Yu Mincho", Font.ITALIC, 54));
-		label_1.setBounds(93, 11, 328, 47);
+		label_1.setFont(new Font("Yu Mincho", Font.BOLD | Font.ITALIC, 70));
+		label_1.setBounds(71, 23, 383, 70);
 		DifficultyPanel.add(label_1);
 
 		JButton DifficultyBackbutton = new JButton("<-Back");
@@ -2411,13 +2662,13 @@ public class New_GUI implements ActionListener {
 		JLabel lblWelcome = new JLabel("Welcome:");
 		lblWelcome.setForeground(Color.ORANGE);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblWelcome.setBounds(184, 60, 103, 14);
+		lblWelcome.setBounds(184, 104, 103, 14);
 		DifficultyPanel.add(lblWelcome);
 
 		JLabel lblChooseDifficulty = new JLabel("Choose Difficulty");
 		lblChooseDifficulty.setForeground(Color.ORANGE);
 		lblChooseDifficulty.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblChooseDifficulty.setBounds(184, 81, 121, 17);
+		lblChooseDifficulty.setBounds(184, 122, 121, 17);
 		DifficultyPanel.add(lblChooseDifficulty);
 
 		JButton btnEasy = new JButton("Easy");
@@ -2438,7 +2689,7 @@ public class New_GUI implements ActionListener {
 				DifficultyPanel.setVisible(false);
 			}
 		});
-		btnEasy.setBounds(184, 109, 170, 47);
+		btnEasy.setBounds(184, 150, 170, 47);
 		DifficultyPanel.add(btnEasy);
 
 		JButton btnMedium = new JButton("Medium");
@@ -2446,7 +2697,7 @@ public class New_GUI implements ActionListener {
 		btnMedium.setBorder(new BevelBorder(BevelBorder.RAISED, null, null,
 				null, null));
 		btnMedium.setBackground(Color.YELLOW);
-		btnMedium.setBounds(184, 167, 170, 47);
+		btnMedium.setBounds(184, 219, 170, 47);
 		DifficultyPanel.add(btnMedium);
 
 		JButton btnHard = new JButton("Hard");
@@ -2454,7 +2705,7 @@ public class New_GUI implements ActionListener {
 		btnHard.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null,
 				null));
 		btnHard.setBackground(new Color(255, 153, 0));
-		btnHard.setBounds(184, 225, 170, 47);
+		btnHard.setBounds(184, 288, 170, 47);
 		DifficultyPanel.add(btnHard);
 
 		JButton btnEvil = new JButton("EVIL!!");
@@ -2462,7 +2713,7 @@ public class New_GUI implements ActionListener {
 		btnEvil.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null,
 				null));
 		btnEvil.setBackground(new Color(255, 0, 0));
-		btnEvil.setBounds(184, 283, 170, 47);
+		btnEvil.setBounds(184, 357, 170, 47);
 		DifficultyPanel.add(btnEvil);
 
 		textUser = new JTextField();
@@ -2470,63 +2721,15 @@ public class New_GUI implements ActionListener {
 		textUser.setFont(new Font("Tahoma", Font.BOLD, 15));
 		textUser.setBorder(null);
 		textUser.setBackground(new Color(0, 102, 51));
-		textUser.setBounds(256, 58, 139, 20);
+		textUser.setBounds(256, 102, 139, 20);
 		DifficultyPanel.add(textUser);
 		textUser.setColumns(10);
-
-		JLabel label_2 = new JLabel("SUDOKU");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(Color.ORANGE);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		label_2.setBounds(53, 11, 328, 47);
-		EasyPuzzlePanel.add(label_2);
-
-		JButton PuzzleBackbutton = new JButton("<-Back");
-		PuzzleBackbutton.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null,
-				null));
-		PuzzleBackbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DifficultyPanel.setVisible(true);
-				EasyPuzzlePanel.setVisible(false);
-			}
-		});
-		PuzzleBackbutton.setBounds(0, 0, 89, 23);
-		EasyPuzzlePanel.add(PuzzleBackbutton);
-
-		JLabel label_3 = new JLabel("Welcome:");
-		label_3.setBounds(141, 60, 72, 14);
-		EasyPuzzlePanel.add(label_3);
-
-		JLabel lblChooseSudokuPuzzle = new JLabel("Choose Sudoku Puzzle");
-		lblChooseSudokuPuzzle.setBounds(141, 76, 168, 14);
-		EasyPuzzlePanel.add(lblChooseSudokuPuzzle);
-
-		JButton btnEasy_1 = new JButton("Easy 1");
-		btnEasy_1.setBounds(53, 90, 328, 23);
-		EasyPuzzlePanel.add(btnEasy_1);
-
-		JButton btnEasy_5 = new JButton("Easy 5");
-		btnEasy_5.setBounds(53, 227, 328, 23);
-		EasyPuzzlePanel.add(btnEasy_5);
-
-		JButton btnEasy_2 = new JButton("Easy 2");
-		btnEasy_2.setBounds(53, 125, 328, 23);
-		EasyPuzzlePanel.add(btnEasy_2);
-
-		JButton btnEasy_4 = new JButton("Easy 4");
-		btnEasy_4.setBounds(53, 193, 328, 23);
-		EasyPuzzlePanel.add(btnEasy_4);
-
-		JButton btnEasy_3 = new JButton("Easy 3");
-		btnEasy_3.setBounds(53, 159, 328, 23);
-		EasyPuzzlePanel.add(btnEasy_3);
-
-		textPUser = new JTextField();
-		textPUser.setColumns(10);
-		textPUser.setBorder(null);
-		textPUser.setBackground(SystemColor.menu);
-		textPUser.setBounds(206, 57, 103, 20);
-		EasyPuzzlePanel.add(textPUser);
+		
+		JLabel imageLabel3 = new JLabel("");
+		Image bambooImage2 = new ImageIcon(this.getClass().getResource("/bamboostalks.png")).getImage(); //set image for difficulty screen
+		imageLabel3.setIcon(new ImageIcon(bambooImage2));
+		imageLabel3.setBounds(10, 54, 150, 432);
+		DifficultyPanel.add(imageLabel3);
 	}
 
 	private JMenuItem makeMenuItem(String name) {
