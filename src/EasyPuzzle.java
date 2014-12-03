@@ -33,9 +33,9 @@ public class EasyPuzzle extends Puzzle {
 		PlayBoard newBoard = new PlayBoard(null, null, 9, 9);
 		PlayCell[][] newBoard_Puzzle = new PlayCell[9][9];
 		int[][] newBoard_Solution = new int[9][9];
-		if(DEBUG)
-			System.out.format("-------%n-------%n%s%n-------%n-------%n",this.getDifficulty());
-		Random rand = new Random(1);
+		if(DEBUG) System.out.format("-------%n-------%n%s%n-------%n-------%n",this.getDifficulty());
+		Random rand;
+		if(DEBUG) rand = new Random(1); else rand = new Random();
 		String filename = String.format("src/%s/%s_%s.txt",this.getDifficulty(),this.getDifficulty(),Integer.toString(rand.nextInt(4) + 1));
 		
 		try {
@@ -70,33 +70,6 @@ public class EasyPuzzle extends Puzzle {
 					}
 					newBoard.setBoardPattern(newBoard_Puzzle);
 				}	
-				
-					
-				
-				/*
-				Component [] panels = the_grid.getComponents();
-				for (Component c : panels) {
-					Component[] texts = ((Container) c).getComponents();
-					line = in.readLine();
-					if (line == null) throw new IOException ("Premature EOF");
-					int i = 0;
-					for (Component t :texts ) {
-						String value = new String (line.substring(i,i+1));
-						if (value.equals("0")) 
-						{
-							value = "";
-							((JTextField) t).setEditable(true);
-						}
-						else
-						{
-							((JTextField) t).setText(value);
-							((JTextField) t).setEditable(false);
-						}
-						((JTextField) t).setBackground(saved_bg);
-						i++;
-					}
-					}
-					*/
 			} finally {
 				
 			}
