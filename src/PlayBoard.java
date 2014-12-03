@@ -220,9 +220,9 @@ public class PlayBoard {
 		return this.getCell(column, row).getPenValue();
 	}
 	
-	public String getValueAsString(int colIndex, int rowIndex) {
-		if(this.BoardPattern[colIndex][rowIndex].getPenValue() > 0)
-			return Integer.toString(this.BoardPattern[colIndex][rowIndex].getPenValue());
+	public String getValueAsString(int column, int row) {
+		if(this.getCell(column, row).getPenValue() > 0)
+			return Integer.toString(this.getCell(column, row).getPenValue());
 		else
 			return " ";
 	}

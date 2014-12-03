@@ -124,6 +124,7 @@ public class New_GUI implements ActionListener {
 		GameBackbutton.setBackground(new Color(51, 102, 51));
 		GameBackbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clearFields(); 
 				DifficultyPanel.setVisible(true);
 				GamePanel.setVisible(false);
 			}
@@ -2767,7 +2768,16 @@ public class New_GUI implements ActionListener {
 					gamePlayer = new Player(userName, getTag(userName), 1);
 							for(int ii = 0; ii < 8; ii++) {
 								for(int i2 = 0; i2 < 8; i2++) {
-									CellArea[ii][i2].setText(gamePlayer.getGameInstance().getBoard().getValueAsString(ii,i2));
+									
+									if(gamePlayer.getGameInstance().getBoard().isLockedAt(ii + 1, i2 + 1)) {
+										CellArea[ii][i2].setText(" " + gamePlayer.getGameInstance().getBoard().getValueAsString(ii + 1, i2 + 1));
+										CellArea[ii][i2].setFont(new Font("Times New Roman", Font.BOLD, 28));
+										CellArea[ii][i2].setBackground(Color.LIGHT_GRAY);
+										CellArea[ii][i2].setDisabledTextColor(Color.BLACK);
+										CellArea[ii][i2].setEnabled(false);
+									} else {
+											CellArea[ii][i2].setText(gamePlayer.getGameInstance().getBoard().getValueAsString(ii + 1, i2 + 1));
+									}
 								}
 							}
 				} catch (IOException e1) {
@@ -2845,4 +2855,24 @@ public class New_GUI implements ActionListener {
 
 		return result;
 	}
+	
+	private void clearFields()
+	{
+		for(int ii = 0; ii < 8; ii++)
+			for(int jj = 0; jj < 8; jj++)
+			{
+				if(!CellArea[ii][jj].getText().isEmpty())
+				{
+					CellArea[ii][jj].setText("");
+					CellArea[ii][jj].setEditable(false);
+					CellArea[ii][jj].setEnabled(true);
+					CellArea[ii][jj].setBackground(Color.WHITE);
+					selected2.setBackground(Color.WHITE);
+					selected2.setEnabled(true);
+					
+				}
+			}
+	}
+	
+	
 }

@@ -98,7 +98,7 @@ public class EasyPuzzle extends Puzzle {
 					}
 					*/
 			} finally {
-				System.out.println("Problem");
+				
 			}
 		return newBoard;
 		}
